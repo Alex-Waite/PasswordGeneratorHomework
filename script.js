@@ -24,12 +24,14 @@ function getRandomNumber() {
 }
 
 function getRandomSpecialCharacter() {
-
+  const specialCharacters = '!@#$%^&*()_-+=<>?,.:"{}[]\|`~';
+  return specialCharacters[Math.floor(Math.random() * specialCharacters.length)]
 }
 
 console.log(getRandomLowercase())
 console.log(getRandomUppercase())
 console.log(getRandomNumber())
+console.log(getRandomSpecialCharacter())
 
 
 
