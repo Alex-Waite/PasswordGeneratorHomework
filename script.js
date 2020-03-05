@@ -9,7 +9,7 @@ var generateBtn = document.querySelector("#generate");
 
 
 
-// Character Generator
+// Character Generator, Characters loacted from https://www.w3schools.com/html/html_charset.asp
 
 function getRandomLowercase() {
   return String.fromCharCode(Math.floor(Math.random() * 26) + 97)
@@ -33,6 +33,12 @@ console.log(getRandomUppercase())
 console.log(getRandomNumber())
 console.log(getRandomSpecialCharacter())
 
+const randomPass = {
+  lowercase: getRandomLowercase,
+  uppercase: getRandomUppercase,
+  number: getRandomNumber,
+  specialCharacter: getRandomSpecialCharacter
+};
 
 
 
