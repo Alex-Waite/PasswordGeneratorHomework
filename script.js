@@ -19,8 +19,17 @@ function getRandomUppercase() {
   return String.fromCharCode(Math.floor(Math.random() * 26) + 65)
 }
 
+function getRandomNumber() {
+  return String.fromCharCode(Math.floor(Math.random() * 10) + 48)
+}
+
+function getRandomSpecialCharacter() {
+
+}
+
 console.log(getRandomLowercase())
 console.log(getRandomUppercase())
+console.log(getRandomNumber())
 
 
 
