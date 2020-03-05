@@ -24,7 +24,7 @@ function getRandomNumber() {
 }
 
 function getRandomSpecialCharacter() {
-  const specialCharacters = '!@#$%^&*()_-+=<>?,.:"{}[]\|`~';
+  const specialCharacters = '!@#$%^&*()_-+=<>?,.:"{}[]\~';
   return specialCharacters[Math.floor(Math.random() * specialCharacters.length)]
 }
 
