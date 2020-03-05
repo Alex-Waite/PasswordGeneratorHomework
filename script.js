@@ -1,5 +1,3 @@
-"use strict";
-
 // Assignment Code
 
 // DOM Pointers
@@ -44,11 +42,11 @@ console.log(getRandomSpecialCharacter())
 
 // Password Object
 
-const randomPass = {
-  lowercase: getRandomLowercase,
-  uppercase: getRandomUppercase,
-  number: getRandomNumber,
-  specialCharacter: getRandomSpecialCharacter
+const randomFunc = {
+  containsLowercase: getRandomLowercase,
+  containsUppercase: getRandomUppercase,
+  containsNumber: getRandomNumber,
+  containsSpecialCharacter: getRandomSpecialCharacter
 };
 
 
@@ -59,15 +57,40 @@ const randomPass = {
 
 
 // Write password to the #password input
-function writePassword() {
-  var password = (generatePasswordlength, containsLowercase, containsUppercase, containsNumbers, containsSpecialCharacter) {
 
-  };
-  var passwordText = document.querySelector("#password");
+function generatePassword(length, containsLowercase, containsUppercase, containsNumber, containsSpecialCharacter) {
+  let generatedPassword = '';
+  const typesCount = containsLowercase + containsUppercase + containsNumber + containsSpecialCharacter;
+  const typesArr = [{
+    containsLowercase
+  }, {
+    containsUppercase
+  }, {
+    containsNumber
+  }, {
+    containsSpecialCharacter
+  }].filter(item => Object.values(item)[0]);
 
-  passwordText.value = password;
+  // Doesn't have a selected type
+  if (typesCount === 0) {
+    return '';
+  }
 
+  // create a loop
+  for (let i = 0; i < length; i += typesCount) {
+    typesArr.forEach(type => {
+      const funcName = Object.keys(type)[0];
+      generatedPassword += randomFunc[funcName]();
+    });
+
+  }
+
+  console.log(generatedPassword)
+  const finalPassword = generatedPassword.slice(0, length);
+
+  return finalPassword;
 }
+
 
 
 
@@ -80,10 +103,10 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", () => {
-  const length = parseInt(lengthBox.value)
+  const length = +lengthBox.value;
   const containsLowercase = lowercaseBox.checked;
   const containsUppercase = uppercaseBox.checked;
   const containsNumbers = numberBox.checked
   const containsSpecialCharacter = specialCharacterBox.checked;
-  passwordText = generatePassword(length, containsLowercase, containsUppercase, containsNumbers, containsSpecialCharacter)
+  generatePassword(length, containsLowercase, containsUppercase, containsNumbers, containsSpecialCharacter)
 })
