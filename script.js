@@ -1,6 +1,15 @@
+"use strict";
+
 // Assignment Code
+
+// DOM Pointers
 var generateBtn = document.querySelector("#generate");
 
+const uppercaseBox = document.getElementById('uppercaseCheck');
+const lowercaseBox = document.getElementById('lowercaseCheck');
+const numberBox = document.getElementById('numberCheck');
+const specialCharacterBox = document.getElementById('specialCharacterCheck');
+const lengthBox = document.getElementById('lengthCheck');
 
 
 
@@ -24,14 +33,16 @@ function getRandomNumber() {
 }
 
 function getRandomSpecialCharacter() {
-  const specialCharacters = '!@#$%^&*()_-+=<>?,.:"{}[]\~';
-  return specialCharacters[Math.floor(Math.random() * specialCharacters.length)]
+  const specialCharacter = '!@#$%^&*()_-+=<>?,.:"{}[]\~';
+  return specialCharacter[Math.floor(Math.random() * specialCharacter.length)]
 }
 
 console.log(getRandomLowercase())
 console.log(getRandomUppercase())
 console.log(getRandomNumber())
 console.log(getRandomSpecialCharacter())
+
+// Password Object
 
 const randomPass = {
   lowercase: getRandomLowercase,
@@ -49,7 +60,9 @@ const randomPass = {
 
 // Write password to the #password input
 function writePassword() {
-  var password = generatePassword();
+  var password = (generatePasswordlength, containsLowercase, containsUppercase, containsNumbers, containsSpecialCharacter) {
+
+  };
   var passwordText = document.querySelector("#password");
 
   passwordText.value = password;
@@ -66,4 +79,11 @@ function writePassword() {
 
 
 // Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
+generateBtn.addEventListener("click", () => {
+  const length = parseInt(lengthBox.value)
+  const containsLowercase = lowercaseBox.checked;
+  const containsUppercase = uppercaseBox.checked;
+  const containsNumbers = numberBox.checked
+  const containsSpecialCharacter = specialCharacterBox.checked;
+  passwordText = generatePassword(length, containsLowercase, containsUppercase, containsNumbers, containsSpecialCharacter)
+})
