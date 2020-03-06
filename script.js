@@ -1,23 +1,15 @@
 // Assignment Code
 
-// DOM Pointers
+// DOM Pointers, Locating ID's on the HTML
 var generateBtn = document.querySelector("#generate");
-
+const passwordText = document.querySelector("#password")
 const uppercaseBox = document.getElementById('uppercaseCheck');
 const lowercaseBox = document.getElementById('lowercaseCheck');
 const numberBox = document.getElementById('numberCheck');
 const specialCharacterBox = document.getElementById('specialCharacterCheck');
 const lengthBox = document.getElementById('lengthCheck');
 
-
-
-
-
-
-
-
-// Character Generator, Characters loacted from https://www.w3schools.com/html/html_charset.asp
-
+// Character Generator, Characters loacted from https://www.w3schools.com/html/html_charset.asp, assigns Math.random numbers to specific characters
 function getRandomLowercase() {
   return String.fromCharCode(Math.floor(Math.random() * 26) + 97)
 }
@@ -35,12 +27,7 @@ function getRandomSpecialCharacter() {
   return specialCharacter[Math.floor(Math.random() * specialCharacter.length)]
 }
 
-console.log(getRandomLowercase())
-console.log(getRandomUppercase())
-console.log(getRandomNumber())
-console.log(getRandomSpecialCharacter())
-
-// Password Object
+// Password Object, Making the password an object allows the conditions of the password to be restricted
 
 const randomFunc = {
   containsLowercase: getRandomLowercase,
@@ -49,14 +36,8 @@ const randomFunc = {
   containsSpecialCharacter: getRandomSpecialCharacter
 };
 
-
-
-
-
-
-
-
-// Write password to the #password input
+// This function uses caclulates the amount of conditions ticked (for the loop below) and contains an array of all the conditions,
+// The filter function at the end removes types from the array if they are unchecked  
 
 function generatePassword(length, containsLowercase, containsUppercase, containsNumber, containsSpecialCharacter) {
   let generatedPassword = '';
@@ -71,37 +52,28 @@ function generatePassword(length, containsLowercase, containsUppercase, contains
     containsSpecialCharacter
   }].filter(item => Object.values(item)[0]);
 
-  // Doesn't have a selected type
+  // If no conditions are checked then nothing will happen
   if (typesCount === 0) {
-    return '';
+    return ""
   }
 
-  // create a loop
-  for (let i = 0; i < length; i += typesCount) {
+  // create a loop - this loops through increasing i by the amount of conditions selected,
+  //it will generate 1 of each character type selected using the randomFunc object and loop though untill the users chosen length is greter than i
+  for (let i = 0; i < length; i = i + typesCount) {
     typesArr.forEach(type => {
       const funcName = Object.keys(type)[0];
       generatedPassword += randomFunc[funcName]();
     });
 
   }
-
-  console.log(generatedPassword)
+  // The loop above increments by the amount of conditions selected (so if all boxes are ticked the password will only generate in increments of 4)
+  // This cuts the length of the generated password to the users chosen length
   const finalPassword = generatedPassword.slice(0, length);
-
-  return finalPassword;
+  passwordText.textContent = finalPassword;
 }
 
-
-
-
-
-
-
-
-
-
-
-// Add event listener to generate button
+// Add event listener to generate button - WHEN the button is clicked THEN generate password will run
+// The const's are reading if the conditions are ticked, if they are they are passed through to the generatePassword() function
 generateBtn.addEventListener("click", () => {
   const length = +lengthBox.value;
   const containsLowercase = lowercaseBox.checked;
