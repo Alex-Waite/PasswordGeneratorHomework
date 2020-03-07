@@ -54,7 +54,21 @@ function generatePassword(length, containsLowercase, containsUppercase, contains
 
   // If no conditions are checked then nothing will happen
   if (typesCount === 0) {
-    return ""
+    alert("Please pick at least 1 box!")
+    return
+  }
+
+  if (length == 0) {
+    alert("Please pick a charcater length betweeen 8 - 128")
+    return;
+  }
+  if (8 > length) {
+    alert("The minimum character length is 8")
+    return;
+  }
+  if (length > 128) {
+    alert("The maximum character length is 128")
+    return;
   }
 
   // create a loop - this loops through increasing i by the amount of conditions selected,
@@ -63,6 +77,7 @@ function generatePassword(length, containsLowercase, containsUppercase, contains
     typesArr.forEach(type => {
       const funcName = Object.keys(type)[0];
       generatedPassword += randomFunc[funcName]();
+
     });
 
   }
